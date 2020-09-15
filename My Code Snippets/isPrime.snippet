@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>isPrime</Title>
+      <Shortcut>isPrime</Shortcut>
+      <Description></Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP"><![CDATA[ll isPrime(ll x) {
+	ll i;
+	if (x < 2) {
+		return 0;
+	}
+	else if (x == 2) {
+		return 1;
+	}
+	else if (x % 2 == 0) {
+		return 0;
+	}
+	else {
+		for (i = 3; i * i <= x; i += 2) {
+			if (x % i == 0) {
+				return 0;
+			}
+		}
+		return 1;
+	}
+}$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

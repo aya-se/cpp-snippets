@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>BellmanFord</Title>
+      <Shortcut>BellmanFord</Shortcut>
+      <Description></Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP">
+        <![CDATA[//add_edge:辺の追加, build:from→toへの経路探索+負の閉路検出
+template<typename T>
+struct BellmanFord {
+	struct Edge {
+		ll from, to; ll cost;
+		Edge() {}
+		Edge(ll from, ll to, ll cost) :from(from), to(to), cost(cost) {}
+	};
+	ll n; vll G; vl used, reach;
+	BellmanFord(ll n) :n(n), G(n), used(n, 0), reach(n, 0) {}
+
+	vector<Edge> es;
+	void add_edge(ll from, ll to, ll cost) {
+		es.push_back(Edge(from, to, cost));
+		G[from].push_back(to);
+	}
+	void dfs(ll v) {
+		if (used[v]) return;
+		used[v] = 1;
+		for (ll u : G[v]) dfs(u);
+	}
+	ll build(ll from, ll to, ll& neg_loop) {
+		for (ll i = 0; i < n; i++) {
+			fill(used.begin(), used.end(), 0);
+			dfs(i);
+			reach[i] = used[to];
+		}
+		vector<ll> ds(n, 1e18);
+		ds[from] = 0;
+		for (ll i = 0; i < n; i++) {
+			bool update = 0;
+			for (auto e : es) {
+				if (!reach[e.from] || !reach[e.to] || ds[e.from] == 1e18) continue;
+				if (ds[e.to] > ds[e.from] + e.cost) {
+					ds[e.to] = ds[e.from] + e.cost;
+					update = 1;
+				}
+			}
+			if (!update)break;
+			if (i == n - 1) {
+				neg_loop = 1;
+				return INF;
+			}
+		}
+		neg_loop = 0;
+		return ds[to];
+	}
+};$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

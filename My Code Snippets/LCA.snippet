@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>LCA</Title>
+      <Shortcut>LCA</Shortcut>
+      <Description></Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP">
+        <![CDATA[struct Edge {ll to;};
+using Graph = vector<vector<Edge>>;
+/* LCA(G, root): 木 G に対する根を root として Lowest Common Ancestor を求める構造体
+    query(u,v): u と v の LCA を求める。計算量 O(logn)
+    前処理: O(nlogn)時間, O(nlogn)空間
+*/
+struct LCA {
+    vll parent; //parent[k][u]：uの2^k先の親(ダブリングの手法)
+    vl dist; //根からの距離
+    LCA(const Graph& G, ll root = 0) { init(G, root); }
+    // 初期化
+    void init(const Graph& G, ll root = 0) {
+        ll V = G.size();
+        ll K = 1;
+        while (((ll)1 << K) < V) K++;
+        parent.assign(K, vl(V, -1));
+        dist.assign(V, -1);
+        dfs(G, root, -1, 0);
+        for (ll k = 0; k + 1 < K; k++) {
+            for (ll v = 0; v < V; v++) {
+                if (parent[k][v] < 0) parent[k + 1][v] = -1;
+                else parent[k + 1][v] = parent[k][parent[k][v]];
+            }
+        }
+    }
+    // 根からの距離と1つ先の頂点を求める
+    void dfs(const Graph& G, ll v, ll p, ll d) {
+        parent[0][v] = p; dist[v] = d;
+        for (auto e : G[v]) if (e.to != p) dfs(G, e.to, v, d + 1);
+    }
+    ll query(ll u, ll v) {
+        if (dist[u] < dist[v]) swap(u, v);  //uをより深い頂点に調整
+        ll K = parent.size();
+        // LCAまでの距離を同じにする
+        for (ll k = 0; k < K; k++) {
+            // ダブリングで高速化している箇所(bitが立っている場合に効率的に遡っている)
+            if ((dist[u] - dist[v]) >> k & 1) u = parent[k][u];
+        }
+        // 二分探索でLCAを求める
+        if (u == v) return u;
+        for (ll k = K - 1; k >= 0; k--) {
+            if (parent[k][u] != parent[k][v]) {
+                u = parent[k][u]; v = parent[k][v];
+            }
+        }
+        return parent[0][u];
+    }
+    // 2頂点間の距離を取得する
+    ll get_dist(ll u, ll v) { return dist[u] + dist[v] - 2 * dist[query(u, v)];}
+    // 頂点u,vのパス上に頂点aが存在するか判定する
+    bool is_on_path(ll u, ll v, ll a) { return get_dist(u, a) + get_dist(a, v) == get_dist(u, v); }
+
+};$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

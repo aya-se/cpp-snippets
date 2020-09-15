@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>eratos</Title>
+      <Shortcut>eratos</Shortcut>
+      <Description></Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP"><![CDATA[void eratos(vl isPrime) {
+	//(注)isPrimeのサイズはN+1にする！実際にはmain内に配置して使用
+	ll i, j;
+	for (i = 0; i < isPrime.size(); i++) {
+		isPrime[i] = 1;
+	}
+	isPrime[0] = 0; isPrime[1] = 0;
+	for (i = 2; i * i <= isPrime.size() - 1; i++) {
+		if (isPrime[i] == 1) {
+			j = i * 2;
+			while (j <= isPrime.size() - 1) {
+				isPrime[j] = 0;
+				j = j + i;
+			}
+		}
+	}
+}$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

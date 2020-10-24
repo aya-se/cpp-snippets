@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Npow</Title>
+      <Shortcut>Npow</Shortcut>
+      <Description>N乗高速計算</Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP">
+        <![CDATA[ll Npow(ll x, ll n) {
+	if (n == 0) return 1;
+	if (n % 2 == 0) return Npow(x * x % MOD, n / 2);
+	else return x * Npow(x, n - 1) % MOD;
+}
+$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

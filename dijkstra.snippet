@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>dijkstra</Title>
+      <Shortcut>dijkstra</Shortcut>
+      <Description></Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP"><![CDATA[void dijkstra(ll s) {
+	priority_queue<pll> PQ;
+	vl D(N), color(N);
+	for (ll i = 0; i < N; i++) {
+		D[i] = INF;
+		color[i] = 0;
+	}
+	D[s] = 0;
+	PQ.push(make_pair(0, s));
+	color[0] = 1;
+	ll q = -1;
+	while (!PQ.empty()) {
+		pll f = PQ.top();
+		PQ.pop();
+		ll u = f.second;
+		color[u] = 2;
+		if (D[u] < f.first * q) {
+			continue;
+		}
+		for (ll j = 0; j < path[u].size(); j++) {
+			ll v = path[u][j].first;
+			if (color[v] == 2) {
+				continue;
+			}
+			if (D[v] > D[u] + path[u][j].second) {
+				D[v] = D[u] + path[u][j].second;
+				color[v] = 1;
+				PQ.push(make_pair(D[v] * q, v));
+			}
+		}
+	}
+	cout << (D[N - 1] == INF ? -1 : D[N - 1]);
+}$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

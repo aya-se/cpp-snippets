@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>bitList</Title>
+      <Shortcut>bitList</Shortcut>
+      <Description>bit探索でn進法k桁の数fを各桁の値に変換する関数</Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP">
+        <![CDATA[vl bitList(ll n, ll k, ll f) {
+	vl bitList(k);
+	for (ll i = 0; i < k; i++) {
+		bitList[i] = f % n;
+		f /= n;
+	}
+	return bitList;
+}$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

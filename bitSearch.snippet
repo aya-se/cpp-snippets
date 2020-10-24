@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>bitSearch</Title>
+      <Shortcut>bitSearch</Shortcut>
+      <Description></Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP"><![CDATA[void bitSearch(ll n) {
+	ll i, j;
+	for (i = 0; i < pow(2, n); i++) {
+		ll p = i;
+		for (j = 0; j < n; j++) {
+			cout << p % 2;
+			p /= 2;
+		}
+		cout << endl;
+	}
+}$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

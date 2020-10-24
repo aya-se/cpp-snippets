@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>BIT</Title>
+      <Shortcut>BIT</Shortcut>
+      <Description>RAQ対応BinaryIndexedTree</Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP">
+        <![CDATA[/* BIT: RAQ対応BIT
+    BITはインデックスが1から始まっているので要注意！！！！
+    初期値は a_1 = a_2 = ... = a_n = 0
+    ・add(l,r,x): [l,r) に x を加算する
+    ・sum(i): a_1 + a_2 + ... + a_i を計算する
+    ・query(l,r)：[l,r)の区間和を取得する
+    ・value(i)：i番目の値を取得する
+    ・lower_bound(i)：BIT内で通常の二分探索(※単調性を満たす場合のみ)
+    計算量は全て O(logn)
+*/
+template <typename T>
+struct BIT {
+    ll n; vector<T> bit[2];
+    BIT(ll n_) { init(n_); }
+    void init(ll n_) {
+        n = n_ + 1;
+        for (ll p = 0; p < 2; p++) bit[p].assign(n, 0);
+    }
+    void add_sub(ll p, ll i, T x) {
+        for (ll idx = i; idx < n; idx += (idx & -idx)) {
+            bit[p][idx] += x;
+        }
+    }
+    void add(ll l, ll r, T x) {  // [l,r) に加算
+        add_sub(0, l, -x * (l - 1));
+        add_sub(0, r, x * (r - 1));
+        add_sub(1, l, x);
+        add_sub(1, r, -x);
+    }
+    T sum_sub(ll p, ll i) {
+        T s(0);
+        for (ll idx = i; idx > 0; idx -= (idx & -idx)) s += bit[p][idx];
+        return s;
+    }
+    T sum(ll i) { return sum_sub(0, i) + sum_sub(1, i) * i; }
+    T query(ll l, ll r) { return sum(r - 1) - sum(l - 1); }
+    T value(ll i) { return sum(i) - sum(i - 1); }
+    //単調性を満たす場合のみ利用可能
+    ll binarySearch(ll key) {
+        ll left = 0;
+        ll right = n+1;
+        while (right - left > 1) {
+            ll mid = left + (right - left) / 2;
+            if (value(mid) >= key) right = mid;
+            else left = mid;
+        }
+        /* left は条件を満たさない最大の値、right は条件を満たす最小の値になっている */
+        return right;
+    }
+};$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

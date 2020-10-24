@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>doubling</Title>
+      <Shortcut>doubling</Shortcut>
+      <Description>ダブリングのテンプレート</Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP">
+        <![CDATA[// doubling[i][k]：i番目から2^k進んだ場所
+	vll doubling(log(K), vl(N));
+	for (i = 0; i < N; i++) doubling[i][0] = A[i];
+	for (k = 0; k < log(K)-1; k++) {
+		for (i = 0; i < N; i++) {
+			doubling[i][k + 1] = doubling[doubling[i][k]][k];
+		}
+	}
+	//クエリに対処
+	ll D = K;
+	ll now = 0;
+	for (k = 0; D > 0; k++) {
+		if (K & 1) now = doubling[now][k];
+		D = D >> 1;
+	}$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

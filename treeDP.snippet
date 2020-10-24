@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>treeDP</Title>
+      <Shortcut>treeDP</Shortcut>
+      <Description>木DP</Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP">
+        <![CDATA[//main内でpath,dpのresizeを忘れずに！
+vl dp;
+void dfs(ll now, ll par=-1) {
+	stack<ll> S;
+	S.push(now);
+	while (!S.empty()) {
+		ll u = S.top();
+		S.pop();
+		if (path[u].size() == 1 && par!=-1) {
+			dp[u] = 0;
+			return;
+		}
+		ll pre = 0;
+		for (ll i = 0; i < path[u].size(); i++) {
+			ll v = path[u][i];
+			if (v == par) continue; //指定した親なら探索しない
+			dfs(v,u);
+			pre = max(pre, dp[v]); //遷移式は適宜書き換え
+		}
+		dp[u]=pre+1; //遷移式は適宜書き換え(根の処理)
+	}
+}$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

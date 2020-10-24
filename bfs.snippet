@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>bfs</Title>
+      <Shortcut>bfs</Shortcut>
+      <Description>幅優先探索</Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="csharp"><![CDATA[void bfs(ll now) {
+	queue<ll> Q;
+	Q.push(now);
+	D[now] = 0;
+	flag[now] = 1;
+	ll u;
+	while (!Q.empty()) {
+		u = Q.front();
+		Q.pop();
+		for (ll v = 0; v < path[u].size(); v++) {
+			ll next = path[u][v];
+			if (flag[next] == 0) {
+				D[next] = D[u] + 1;
+				flag[next] = 1;
+				Q.push(next);
+			}
+		}
+	}
+}$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

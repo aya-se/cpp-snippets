@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>LIS</Title>
+      <Shortcut>LIS</Shortcut>
+      <Description>最長部分増加列</Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP">
+        <![CDATA[// LIS：最長部分増加列 / dp：長さiの数列の最終要素の最小値
+	vl dp(N, INF);
+	for (i = 0; i < N; i++) *lower_bound(dp.begin(), dp.end(), A[i])=A[i];
+	for (i = 0; i < N; i++) if (dp[i] != INF) ans = i + 1;$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

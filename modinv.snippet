@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>modinv</Title>
+      <Shortcut>modinv</Shortcut>
+      <Description></Description>
+      <Author></Author>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="false"></Literal>
+      </Declarations>
+      <Code Language="CPP"><![CDATA[ll modinv(ll a, ll m) {
+	ll b = m, u = 1, v = 0;
+	while (b) {
+		ll t = a / b;
+		a -= t * b; swap(a, b);
+		u -= t * v; swap(u, v);
+	}
+	u %= m;
+	if (u < 0) u += m;
+	return u;
+}$end$]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

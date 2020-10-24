@@ -52,19 +52,21 @@ bool pairCompare(const pll firstElof, pll secondElof)
 {
 	return firstElof.second < secondElof.second;
 }
-//AtCoderˆÈŠO‚Å‚ÍƒRƒƒ“ƒgƒAƒEƒg‚ð–Y‚ê‚¸‚ÉI
+//AtCoderä»¥å¤–ã§ã¯ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆã‚’å¿˜ã‚Œãšã«ï¼
 //#include <atcoder/all>
 //using namespace atcoder;
-//**SnippetƒŠƒXƒg**//
+//**Snippetãƒªã‚¹ãƒˆ**//
 //rep, vin, all, iteLoop, bitSearch, bitList, nod, LIS, digitDP, treeDP, Rerooting//
 //gcdlcm, isPrime, eratos, primeFactorize, Npow, combination, divisor, modinv, doubling//
 //dfs, bfs, dijkstra, WarshallFloyd, BellmanFord, UnionFind, Kruskal, RMQ, LCA, FordFulkerson//
+//**AC Libraryãƒªã‚¹ãƒˆ**//
+//pow_mod, inv_mod, floor_sum, convolution, convolution_ll, modint//
+//fenwicktree, segtree, lazysegtree, string//
 ll i, j, k, l; ll N, M, K, H, W, X, Y, Z, R, Q, T;
-ll MOD = 1000000007, INF = 1LL << 60, ans = 0, z = 0, o = 1;
-vl flag, D; vll path; vs S;
+ll MOD = 998244353, INF = 1LL << 60, ans = 0, z = 0, o = 1;
+vl flag, D; vector<vpll> path;
 //***********//
 int main() {
-	cin.tie(nullptr);
-	ios::sync_with_stdio(false);
 	
 }
+
